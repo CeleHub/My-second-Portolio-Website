@@ -13,7 +13,7 @@ function AboutCard() {
             <br />
             I am currently employed as a data analysis intern at GoPro Integrated Technologies, Lagos.
             <br />
-            I have currently pursuing a BSc. in Computer Science at Mountain Top University,
+            I am currently pursuing a BSc. in Computer Science at Mountain Top University,
             Nigeria.
             <br />
             <br />
