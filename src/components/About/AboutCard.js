@@ -17,7 +17,7 @@ function AboutCard() {
             {/* Mesra. */}
             <br />
             <br />
-            Apart from coding and manipulating data, some other activities that I love to do:
+            Apart from coding and manipulating data, some other activities that I love to do are:
           </p>
           <ul>
             <li className="about-activity">
@@ -32,9 +32,15 @@ function AboutCard() {
           </ul>
 
           <p style={{ color: "rgb(155 126 172)" }}>
-            "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters"{" "}
+            {/* "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters"{" "} */}
+            “If a man is called to be a street sweeper, he should sweep streets even as a Michaelangelo painted, or Beethoven composed music or Shakespeare wrote poetry. 
+            He should sweep streets so well that all the hosts of heaven and earth will pause to say, 'Here lived a great street sweeper who did his job well'.”{" "}
           </p>
-          <footer className="blockquote-footer">Colossians 3:23</footer>
+          <footer 
+          className="blockquote-footer">
+            {/* Colossians 3:23 */}
+            <cite title="Source Title">Martin Luther King Jr.</cite>
+          </footer>
         </blockquote>
       </Card.Body>
     </Card>
