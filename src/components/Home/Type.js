@@ -8,6 +8,7 @@ function Type() {
         strings: [
           "Data Analyst",
           "Backend Developer",
+          "Student",
           "Freelancer",
           // "MERN Stack Developer",
           // "Open Source Contributor",

@@ -11,10 +11,10 @@ function AboutCard() {
             Hi Everyone, I am <span className="purple">Celestine Okonkwo </span>
             from <span className="purple"> Anambra, Nigeria. </span>
             <br />
-            I am currently employed as a data analysis intern at GPIT Limited.
+            I am currently employed as a data analysis intern at GoPro Integrated Technologies, Lagos.
             <br />
-            {/* I have completed Integrated MSc (IMSc) in Maths and Computing at BIT */}
-            {/* Mesra. */}
+            I have currently pursuing a BSc. in Computer Science at Mountain Top University,
+            Nigeria.
             <br />
             <br />
             Apart from coding and manipulating data, some other activities that I love to do are:
