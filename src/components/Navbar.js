@@ -10,7 +10,7 @@ import { ImBlog } from "react-icons/im";
 import {
   AiFillStar,
   AiOutlineHome,
-  AiOutlineFundProjectionScreen,
+  // AiOutlineFundProjectionScreen,
   AiOutlineUser,
 } from "react-icons/ai";
 
