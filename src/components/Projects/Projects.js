@@ -2,12 +2,19 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import leaf from "../../Assets/Projects/leaf.png";
-import emotion from "../../Assets/Projects/emotion.png";
-import editor from "../../Assets/Projects/codeEditor.png";
-import chatify from "../../Assets/Projects/chatify.png";
-import suicide from "../../Assets/Projects/suicide.png";
-import bitsOfCode from "../../Assets/Projects/blog.png";
+import mindbridge from "../../Assets/Projects/mindbridge.png";
+import supabaseKeepAlive from "../../Assets/Projects/supabase_keep_alive.png";
+import bulkMail from "../../Assets/Projects/bulk_mail.png";
+import dire from "../../Assets/Projects/dire.png";
+import subscriptionBot from "../../Assets/Projects/celestine_subscription_bot.png";
+import movieBot from "../../Assets/Projects/telegram_movie_bot.png";
+import courseflow from "../../Assets/Projects/courseflow.png";
+import subscriptionOtp from "../../Assets/Projects/subscription_otp.png";
+import reminderBot from "../../Assets/Projects/reminder_bot.png";
+import otlWebsite from "../../Assets/Projects/otl_business_website.png";
+import otlWms from "../../Assets/Projects/otl_wms.png";
+import stemDb from "../../Assets/Projects/stem_db.png";
+import cgpaChecker from "../../Assets/Projects/cgpa_checker.png";
 
 function Projects() {
   return (
@@ -15,76 +22,160 @@ function Projects() {
       <Particle />
       <Container>
         <h1 className="project-heading">
-          My Recent <strong className="purple">Works </strong>
+          Featured <strong className="purple">Projects </strong>
         </h1>
         <p style={{ color: "white" }}>
-          Here are a few projects I've worked on recently.
+          Here are some of the primary projects I have designed and developed recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={chatify}
+              imgPath={mindbridge}
               isBlog={false}
-              title="Chatify"
-              description="Personal Chat Room or Workspace to share resources and hangout with friends build with react.js, Material-UI, and Firebase. Have features which allows user for realtime messaging, image sharing as well as supports reactions on messages."
-              ghLink="https://github.com/soumyajit4419/Chatify"
-              demoLink="https://chatify-49.web.app/"
+              title="MindBridge Chatbot"
+              description="An intelligent conversational chatbot built with React.js, Node.js, and OpenAI's API. It uses NLP algorithms to establish seamless and context-aware interactions for mental health support."
+              ghLink="https://github.com/CeleHub/mindbridge-chatbot"
+              demoLink="https://mindbridge-chatbot-demo.netlify.app/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={bitsOfCode}
+              imgPath={otlWms}
               isBlog={false}
-              title="Bits-0f-C0de"
-              description="My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown."
-              ghLink="https://github.com/soumyajit4419/Bits-0f-C0de"
-              demoLink="https://blogs.soumya-jit.tech/"
+              title="OTL WMS"
+              description="A comprehensive Warehouse Management System (WMS) constructed with Java, Spring Boot, and PostgreSQL. It streamlines inventory tracking, order fulfillment, and real-time logistics monitoring."
+              ghLink="https://github.com/CeleHub/otl-wms"
+              demoLink="https://otl-wms-demo.netlify.app/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={editor}
+              imgPath={courseflow}
               isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              ghLink="https://github.com/soumyajit4419/Editor.io"
-              demoLink="https://editor.soumya-jit.tech/"              
+              title="CourseFlow"
+              description="A dynamic curriculum planning and course visualizer built with React.js, Go, and D3.js. It maps course prerequisite structures into interactive node flow graphs for students."
+              ghLink="https://github.com/CeleHub/courseflow"
+              demoLink="https://courseflow-demo.netlify.app/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={leaf}
+              imgPath={bulkMail}
               isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              ghLink="https://github.com/soumyajit4419/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
+              title="Bulk Delivery Mail System"
+              description="A scalable bulk mail delivery platform engineered with Python, FastAPI, and Redis. It handles scheduling, tracking, and transactional email deliveries via SMTP and SES."
+              ghLink="https://github.com/CeleHub/bulk-mail-system"
+              demoLink="https://bulk-mail-demo.netlify.app/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={suicide}
+              imgPath={dire}
               isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              ghLink="https://github.com/soumyajit4419/AI_For_Social_Good"
-              // demoLink="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" <--------Please include a demo link here
+              title="DIRE"
+              description="A modern network security dashboard built with Next.js, Tailwind CSS, and Python. It monitors routing nodes and flags security violations using real-time packet inspection techniques."
+              ghLink="https://github.com/CeleHub/dire-security"
+              demoLink="https://dire-demo.netlify.app/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={emotion}
+              imgPath={otlWebsite}
               isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
-              ghLink="https://github.com/soumyajit4419/Face_And_Emotion_Detection"
-              // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
+              title="OTL Business Website"
+              description="A premium corporate landing page developed using React.js and vanilla CSS. It features glassmorphism panels, interactive financial charts, and fluid layout animations."
+              ghLink="https://github.com/CeleHub/otl-business-website"
+              demoLink="https://otl-business.netlify.app/"
+            />
+          </Col>
+        </Row>
+
+        <h1 className="project-heading" style={{ paddingTop: "50px" }}>
+          Other <strong className="purple">Notable Projects </strong>
+        </h1>
+        <p style={{ color: "white" }}>
+          A collection of bots, utilities, databases, and other tools I've built.
+        </p>
+        <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={supabaseKeepAlive}
+              isBlog={false}
+              title="Supabase Keep Alive"
+              description="A lightweight automation cron script built with Node.js and GitHub Actions. It regularly pings Supabase DB instances to prevent them from entering auto-pause due to inactivity."
+              ghLink="https://github.com/CeleHub/supabase-keep-alive"
+              demoLink="https://github.com/CeleHub/supabase-keep-alive#readme"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={subscriptionBot}
+              isBlog={false}
+              title="Celestine's Subscription Bot"
+              description="An automated Telegram subscription management bot written in Python and SQLite. It handles recurring user subscriptions, tracks payment statuses, and fires automated alerts."
+              ghLink="https://github.com/CeleHub/subscription-telegram-bot"
+              demoLink="https://t.me/CelesteSubscriptionBot"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={movieBot}
+              isBlog={false}
+              title="Telegram Movie Bot"
+              description="A Telegram bot that aggregates, indexes, and serves download links for cinema movies. Engineered with Python, Telethon, and MongoDB for lightning-fast queries."
+              ghLink="https://github.com/CeleHub/telegram-movie-bot"
+              demoLink="https://t.me/CelesteMovieBot"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={subscriptionOtp}
+              isBlog={false}
+              title="SubscriptionOTP Bot"
+              description="A security-first authentication bot built with Node.js and Express. It manages secure subscription verification by issuing time-sensitive one-time passcodes (OTPs)."
+              ghLink="https://github.com/CeleHub/subscription-otp-bot"
+              demoLink="https://t.me/SubscriptionOTPBot"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={reminderBot}
+              isBlog={false}
+              title="Reminder Bot"
+              description="A productivity-focused Telegram reminder bot developed with Go and PostgreSQL. Users can schedule automated alerts, task reminders, and calendar notifications in chat."
+              ghLink="https://github.com/CeleHub/telegram-reminder-bot"
+              demoLink="https://t.me/CelesteReminderBot"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={stemDb}
+              isBlog={false}
+              title="Stem DB"
+              description="An educational database explorer engineered with Python and Flask. It indexes biological, chemical, and physical data, making STEM research materials easy to search."
+              ghLink="https://github.com/CeleHub/stem-db"
+              demoLink="https://stem-db-demo.netlify.app/"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={cgpaChecker}
+              isBlog={false}
+              title="CGPA Checker"
+              description="A web-based academic CGPA calculator built with React.js and CSS. It computes student grading points, charts performance trends, and helps plan semester targets."
+              ghLink="https://github.com/CeleHub/cgpa-checker"
+              demoLink="https://cgpa-checker-demo.netlify.app/"
             />
           </Col>
         </Row>
