@@ -33,7 +33,7 @@ function Projects() {
               imgPath={mindbridge}
               isBlog={false}
               title="MindBridge Chatbot"
-              description="MindBridge is an AI-powered mental health triage and support platform designed specifically for university students. Built with React.js and FastAPI, the system integrates a Hybrid AI pipeline: a local Machine Learning model (Logistic Regression + TF-IDF) handles explainable sentiment analysis, while Google Gemini (with API key rotation) generates empathetic responses grounded in Cognitive Behavioral Therapy (CBT). Key features include LIME explainability charts to expose model feature weights, browser-based audio note recording with custom playback speeds, student email verification, and automated GMT session expiration guards for privacy."
+              description="MindBridge is an AI-powered mental health triage and support platform designed specifically for university students. Built with React 19 and FastAPI, it integrates a Hybrid AI pipeline combining a local machine learning model (Logistic Regression + TF-IDF) for explainable sentiment classification and Google Gemini Pro (with API key-rotation) for empathetic, CBT-grounded dialogues. Features include a LIME explainability dashboard displaying term-weight charts, browser-based vocal audio note recording with a custom speed player, MTU domain verification, and guest session daily expiration guards."
               ghLink="https://github.com/CeleHub/mindbridge-chatbot"
               demoLink="https://mindbridgechatbot.vercel.app/"
             />
@@ -54,7 +54,7 @@ function Projects() {
               imgPath={courseflow}
               isBlog={false}
               title="CourseFlow"
-              description="An enterprise-grade academic management and timetable scheduling platform built with Next.js, TypeScript, and Tailwind CSS. The system features an automated, constraint-based scheduling engine that generates conflict-free lecture and exam timetables while preventing room double-bookings and lecturer time overlaps. It provides Heads of Department (HODs) and Admins with interactive calendar views, manual schedule override controls, and slot-pinning capabilities to preserve custom bookings during automated runs. Key utilities include an integrated scheduling complaints system for students and staff, and a multi-format export engine that generates high-fidelity PDF, Excel, and client-side 2x PNG reports."
+              description="An enterprise-grade academic management and timetable scheduling platform. Built with Next.js, NestJS, TypeScript, Tailwind CSS, and PostgreSQL (with Prisma ORM), the system features an automated, constraint-based scheduling engine that generates conflict-free lecture and exam timetables while preventing double-bookings. It provides Heads of Department (HODs) and admins with interactive calendar views, manual scheduling override controls, slot-pinning capabilities, a complaints system, and a multi-format export engine (PDF, Excel, and dual-layer PNG reports)."
               ghLink="https://github.com/CeleHub/courseflow"
               demoLink="https://courseflow-demo.netlify.app/"
             />
@@ -65,7 +65,7 @@ function Projects() {
               imgPath={bulkMail}
               isBlog={false}
               title="Bulk Delivery Mail System"
-              description="A scalable bulk mail delivery platform engineered with Python, FastAPI, and Redis. It handles scheduling, tracking, and transactional email deliveries via SMTP and SES."
+              description="A secure, local client-server email broadcast application. Built with HTML5/CSS3 (modern glassmorphism design), Vanilla JS, Node.js, Express, and Nodemailer, it enables local in-memory parsing of CSV/Excel recipient files (via SheetJS and Multer buffers) and broadcasting of personalized templates. Features include secure local SMTP credentials configuration, a drag-and-drop ingestion preview, a template composer injecting column header placeholders, live pagination previews, throttling delay controls, and a real-time system delivery terminal log."
               ghLink="https://github.com/CeleHub/bulk-mail-system"
               demoLink="https://bulk-mail-demo.netlify.app/"
             />
@@ -76,7 +76,7 @@ function Projects() {
               imgPath={dire}
               isBlog={false}
               title="DIRE"
-              description="A modern network security dashboard built with Next.js, Tailwind CSS, and Python. It monitors routing nodes and flags security violations using real-time packet inspection techniques."
+              description="A Windows-first, offline peer-to-peer (P2P) communication application. Engineered with Electron, React, Vite, Node.js, and TCP Sockets, it enables device discovery, messaging, and real-time voice calls over a Local Area Network (LAN) without requiring an internet connection. It features a premium glassmorphic dark mode UI, mock/simulated Bluetooth discovery, and direct TCP socket networking to establish reliable communication between connected peers."
               ghLink="https://github.com/CeleHub/dire-security"
               demoLink="https://dire-demo.netlify.app/"
             />
@@ -87,7 +87,7 @@ function Projects() {
               imgPath={otlWebsite}
               isBlog={false}
               title="OTL Business Website"
-              description="A premium corporate landing page developed using React.js and vanilla CSS. It features glassmorphism panels, interactive financial charts, and fluid layout animations."
+              description="The official corporate web application for Obijons Trade Link Limited. Built with Next.js 14, React 18, TypeScript, Tailwind CSS, and Supabase (for SSR and secure DB connections), it provides a complete product catalog interface. It features secure admin dashboard authentication, forms integration using React Hook Form and Zod validation schemas, email routing via Resend API, automated product data migrations, and performance analytics tracking."
               ghLink="https://github.com/CeleHub/otl-business-website"
               demoLink="https://otl-business.netlify.app/"
             />
@@ -106,7 +106,7 @@ function Projects() {
               imgPath={supabaseKeepAlive}
               isBlog={false}
               title="Supabase Keep Alive"
-              description="A lightweight automation cron script built with Node.js and GitHub Actions. It regularly pings Supabase DB instances to prevent them from entering auto-pause due to inactivity."
+              description="A lightweight automation cron script configured as a GitHub Actions workflow. Built with Bash, curl, and jq, it reads configurations from encrypted secrets to regularly ping REST API endpoints of Supabase projects, preventing database instances from entering auto-pause due to inactivity. Tracks success/failure rates per project and sends real-time status reports directly to Telegram using the Telegram Bot API."
               ghLink="https://github.com/CeleHub/supabase-keep-alive"
               demoLink="https://github.com/CeleHub/supabase-keep-alive#readme"
             />
@@ -117,7 +117,7 @@ function Projects() {
               imgPath={subscriptionBot}
               isBlog={false}
               title="Celestine's Subscription Bot"
-              description="An automated Telegram subscription management bot written in Python and SQLite. It handles recurring user subscriptions, tracks payment statuses, and fires automated alerts."
+              description="An automated Telegram subscription management bot built with Node.js, Telegraf, and Mongoose (connecting to MongoDB Atlas). It tracks active customer subscriptions, amounts due, payment methods, and renewal histories. Using node-cron and dayjs, the bot schedules automated payment reminders sent at specific intervals (7, 3, 2, and 1 days before expiration) to alert users of upcoming renewals."
               ghLink="https://github.com/CeleHub/subscription-telegram-bot"
               demoLink="https://t.me/CelesteSubscriptionBot"
             />
@@ -128,7 +128,7 @@ function Projects() {
               imgPath={movieBot}
               isBlog={false}
               title="Telegram Movie Bot"
-              description="A Telegram bot that aggregates, indexes, and serves download links for cinema movies. Engineered with Python, Telethon, and MongoDB for lightning-fast queries."
+              description="An asynchronous Telegram bot that aggregates, indexes, and delivers download links for cinema movies. Engineered with Python, Telethon, MongoDB, and the TMDB API, it allows users to search for films and instantly retrieves poster artwork, ratings, synopsis, and year release details. It performs parallel web scraping across multiple custom media providers concurrently using asyncio and httpx to gather download links."
               ghLink="https://github.com/CeleHub/telegram-movie-bot"
               demoLink="https://t.me/CelesteMovieBot"
             />
@@ -139,7 +139,7 @@ function Projects() {
               imgPath={subscriptionOtp}
               isBlog={false}
               title="SubscriptionOTP Bot"
-              description="A security-first authentication bot built with Node.js and Express. It manages secure subscription verification by issuing time-sensitive one-time passcodes (OTPs)."
+              description="A security-first OTP retrieval Telegram bot. Built with Python and python-telegram-bot, it connects securely to a dedicated mailbox via IMAP SSL protocols using email/imaplib, and monitors incoming messages from shared streaming accounts (Netflix, Disney+, Prime Video, Crunchyroll). It automatically processes mail bodies in-memory, extracts 4-to-6 digit verification OTPs via regular expressions, and delivers them instantly to active subscribers."
               ghLink="https://github.com/CeleHub/subscription-otp-bot"
               demoLink="https://t.me/SubscriptionOTPBot"
             />
@@ -150,7 +150,7 @@ function Projects() {
               imgPath={reminderBot}
               isBlog={false}
               title="Reminder Bot"
-              description="A productivity-focused Telegram reminder bot developed with Go and PostgreSQL. Users can schedule automated alerts, task reminders, and calendar notifications in chat."
+              description="A lightweight productivity Telegram bot developed with Python, python-telegram-bot, and python-dotenv. Utilizing the built-in JobQueue scheduler, it allows users to configure automated reminders. It supports absolute daily alerts (e.g., /remind 08:40 Breakfast) or relative durations (e.g., /remind 10m Take a break) with error handling, dynamic job configuration, and multi-format duration parsing."
               ghLink="https://github.com/CeleHub/telegram-reminder-bot"
               demoLink="https://t.me/CelesteReminderBot"
             />
@@ -161,7 +161,7 @@ function Projects() {
               imgPath={stemDb}
               isBlog={false}
               title="Stem DB"
-              description="An educational database explorer engineered with Python and Flask. It indexes biological, chemical, and physical data, making STEM research materials easy to search."
+              description="An educational STEM database explorer built with Python, Flask, and SQLite. It indexes chemical properties, biological taxonomies, and physics constants, offering students and educators a clean search UI to quickly find scientific datasets, formulae, and reference sheets."
               ghLink="https://github.com/CeleHub/stem-db"
               demoLink="https://stem-db-demo.netlify.app/"
             />
@@ -172,7 +172,7 @@ function Projects() {
               imgPath={cgpaChecker}
               isBlog={false}
               title="CGPA Checker"
-              description="A web-based academic CGPA calculator built with React.js and CSS. It computes student grading points, charts performance trends, and helps plan semester targets."
+              description="A responsive academic performance calculator built with React.js and CSS. It computes cumulative grade point averages (CGPA) and semester GPAs, charts performance trends, and enables students to input mock grades to simulate academic targets and plan semester workloads."
               ghLink="https://github.com/CeleHub/cgpa-checker"
               demoLink="https://cgpa-checker-demo.netlify.app/"
             />
