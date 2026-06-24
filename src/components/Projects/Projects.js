@@ -44,9 +44,9 @@ function Projects() {
               imgPath={otlWms}
               isBlog={false}
               title="OTL WMS"
-              description="A comprehensive Warehouse Management System (WMS) constructed with Java, Spring Boot, and PostgreSQL. It streamlines inventory tracking, order fulfillment, and real-time logistics monitoring."
-              ghLink="https://github.com/CeleHub/otl-wms"
-              demoLink="https://otl-wms-demo.netlify.app/"
+              description="A production-grade mobile warehouse management system (WMS) custom-built for motor spare parts distribution. Developed with Flutter and Supabase, the application enforces a strict double-entry ledger system where all stock changes (offloading, removals, and transfers) are recorded as immutable stock movements. It features a secure passwordless login flow using Supabase Edge Functions with custom phone and PIN verification, role-based access controls, auto-complete search functionality for complex part numbers, and native Excel/PDF report generation for seamless inventory audits."
+            // ghLink="https://github.com/CeleHub/goodslocation"
+            // demoLink="https://otl-wms-demo.netlify.app/"
             />
           </Col>
 
