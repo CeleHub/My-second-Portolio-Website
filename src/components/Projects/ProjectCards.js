@@ -37,18 +37,18 @@ function ProjectCards(props) {
         )}
 
         {props.isNDA && (
-          <div style={{ 
-            color: "#a588c0", 
-            fontStyle: "italic", 
-            fontSize: "0.85em", 
-            marginTop: "15px", 
-            display: "flex", 
-            alignItems: "center", 
+          <div style={{
+            color: "#a588c0",
+            fontStyle: "italic",
+            fontSize: "0.85em",
+            marginTop: "15px",
+            display: "flex",
+            alignItems: "center",
             justifyContent: "center",
-            gap: "5px" 
+            gap: "5px"
           }}>
-            <span>🔒</span> 
-            <span>{typeof props.isNDA === "string" ? props.isNDA : "NDA compliance, can't disclose link"}</span>
+            <span>🔒</span>
+            <span>{typeof props.isNDA === "string" ? props.isNDA : "NDA compliance, can't disclose links"}</span>
           </div>
         )}
       </Card.Body>
