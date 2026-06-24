@@ -33,9 +33,9 @@ function Projects() {
               imgPath={mindbridge}
               isBlog={false}
               title="MindBridge Chatbot"
-              description="An intelligent conversational chatbot built with React.js, Node.js, and OpenAI's API. It uses NLP algorithms to establish seamless and context-aware interactions for mental health support."
+              description="MindBridge is an AI-powered mental health triage and support platform designed specifically for university students. Built with React.js and FastAPI, the system integrates a Hybrid AI pipeline: a local Machine Learning model (Logistic Regression + TF-IDF) handles explainable sentiment analysis, while Google Gemini (with API key rotation) generates empathetic responses grounded in Cognitive Behavioral Therapy (CBT). Key features include LIME explainability charts to expose model feature weights, browser-based audio note recording with custom playback speeds, student email verification, and automated GMT session expiration guards for privacy."
               ghLink="https://github.com/CeleHub/mindbridge-chatbot"
-              demoLink="https://mindbridge-chatbot-demo.netlify.app/"
+              demoLink="https://mindbridgechatbot.vercel.app/"
             />
           </Col>
 
