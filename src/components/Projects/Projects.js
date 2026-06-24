@@ -45,8 +45,7 @@ function Projects() {
               isBlog={false}
               title="OTL WMS"
               description="A production-grade mobile warehouse management system (WMS) custom-built for motor spare parts distribution. Developed with Flutter and Supabase, the application enforces a strict double-entry ledger system where all stock changes (offloading, removals, and transfers) are recorded as immutable stock movements. It features a secure passwordless login flow using Supabase Edge Functions with custom phone and PIN verification, role-based access controls, auto-complete search functionality for complex part numbers, and native Excel/PDF report generation for seamless inventory audits."
-            // ghLink="https://github.com/CeleHub/goodslocation"
-            // demoLink="https://otl-wms-demo.netlify.app/"
+              isNDA="NDA compliance, can't disclose link"
             />
           </Col>
 
