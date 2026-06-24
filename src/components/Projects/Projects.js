@@ -54,7 +54,7 @@ function Projects() {
               imgPath={courseflow}
               isBlog={false}
               title="CourseFlow"
-              description="A dynamic curriculum planning and course visualizer built with React.js, Go, and D3.js. It maps course prerequisite structures into interactive node flow graphs for students."
+              description="An enterprise-grade academic management and timetable scheduling platform built with Next.js, TypeScript, and Tailwind CSS. The system features an automated, constraint-based scheduling engine that generates conflict-free lecture and exam timetables while preventing room double-bookings and lecturer time overlaps. It provides Heads of Department (HODs) and Admins with interactive calendar views, manual schedule override controls, and slot-pinning capabilities to preserve custom bookings during automated runs. Key utilities include an integrated scheduling complaints system for students and staff, and a multi-format export engine that generates high-fidelity PDF, Excel, and client-side 2x PNG reports."
               ghLink="https://github.com/CeleHub/courseflow"
               demoLink="https://courseflow-demo.netlify.app/"
             />
