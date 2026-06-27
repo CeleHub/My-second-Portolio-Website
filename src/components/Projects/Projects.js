@@ -77,8 +77,8 @@ function Projects() {
               isBlog={false}
               title="DIRE"
               description="A Windows-first, offline peer-to-peer (P2P) communication application. Engineered with Electron, React, Vite, Node.js, and TCP Sockets, it enables device discovery, messaging, and real-time voice calls over a Local Area Network (LAN) without requiring an internet connection. It features a premium glassmorphic dark mode UI, mock/simulated Bluetooth discovery, and direct TCP socket networking to establish reliable communication between connected peers."
-              ghLink="https://github.com/CeleHub/dire-security"
-              demoLink="https://dire-demo.netlify.app/"
+              ghLink="https://github.com/CeleHub/Dire"
+            // demoLink="https://dire-demo.netlify.app/"
             />
           </Col>
 
