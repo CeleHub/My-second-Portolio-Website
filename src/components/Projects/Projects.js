@@ -64,10 +64,10 @@ function Projects() {
             <ProjectCard
               imgPath={bulkMail}
               isBlog={false}
-              title="Bulk Delivery Mail System"
+              title="Personalized Bulk Email Delivery System"
               description="A secure, local client-server email broadcast application. Built with HTML5/CSS3 (modern glassmorphism design), Vanilla JS, Node.js, Express, and Nodemailer, it enables local in-memory parsing of CSV/Excel recipient files (via SheetJS and Multer buffers) and broadcasting of personalized templates. Features include secure local SMTP credentials configuration, a drag-and-drop ingestion preview, a template composer injecting column header placeholders, live pagination previews, throttling delay controls, and a real-time system delivery terminal log."
-              ghLink="https://github.com/CeleHub/bulk-mail-system"
-              demoLink="https://bulk-mail-demo.netlify.app/"
+              ghLink="https://github.com/CeleHub/Personalized-Email-Delivery-System"
+            // demoLink="https://bulk-mail-demo.netlify.app/"
             />
           </Col>
 
