@@ -56,7 +56,7 @@ function Projects() {
               title="CourseFlow"
               description="An enterprise-grade academic management and timetable scheduling platform. Built with Next.js, NestJS, TypeScript, Tailwind CSS, and PostgreSQL (with Prisma ORM), the system features an automated, constraint-based scheduling engine that generates conflict-free lecture and exam timetables while preventing double-bookings. It provides Heads of Department (HODs) and admins with interactive calendar views, manual scheduling override controls, slot-pinning capabilities, a complaints system, and a multi-format export engine (PDF, Excel, and dual-layer PNG reports)."
               ghLink="https://github.com/CeleHub/courseflow"
-              demoLink="https://courseflow-demo.netlify.app/"
+              demoLink="https://courseflowxi.vercel.app/"
             />
           </Col>
 
