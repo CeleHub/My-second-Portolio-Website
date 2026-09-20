@@ -11,15 +11,15 @@ function AboutCard() {
             Hi Everyone, I am <span className="purple">Celestine Okonkwo. </span>
             {/* from <span className="purple"> Anambra, Nigeria. </span> */}
             <br />
-            I am a software engineer with 2+ years of experience in designing, developing, and maintaining software applications.
-            I am proficient in a variety of programming languages including Java, Python, and JavaScript,
+            I am a software engineer with 4+ years of experience in designing, developing, and maintaining software applications.
+            I am proficient in a variety of programming languages including Java, Python, Next.js, Node.js, TypeScript, and JavaScript,
             and I have experience with various software development methodologies.
             I am passionate about building high-quality software and am always looking for opportunities to learn new technologies and improve my skills.
             <br />
             <br />
             I am currently employed as a software engineer at <span className="purple">GoPro Integrated Technologies</span>, Lagos.
             <br />
-            I am also currently pursuing a BSc. in Computer Science at <span className="purple">Mountain Top University</span>, Nigeria.
+            I am a Bachelor of Science degree holder in Computer Science with <span className="purple">first class honours</span>, since August 2026.
             <br />
             <br />
             Apart from coding and manipulating data, some other activities that I love to do are:

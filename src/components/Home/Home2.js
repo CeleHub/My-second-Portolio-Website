@@ -24,13 +24,13 @@ function Home2() {
               <br />
               <br />I am fluent in classics like
               <i>
-                <b className="purple"> Python, Excel, SQL, Java and Go. </b>
+                <b className="purple"> Python, Excel, SQL, Next.js, Node.js, Typescript, React, Java and Go. </b>
               </i>
               <br />
               <br />
               My field of Interests are &nbsp;
               <i>
-                <b className="purple">Data Analytics and Engineering, building new  Web Technologies and Products </b> and
+                <b className="purple">Building new  Web Technologies and Products, Data Analytics and Engineering </b> and
                 also in areas related to{" "}
                 <b className="purple">
                   Cyber Security.
@@ -39,11 +39,11 @@ function Home2() {
               <br />
               <br />
               Whenever possible, I also apply my passion for developing products
-              with <b className="purple">Python</b> and
+              with <b className="purple">Python, Typescript, Go, and more</b> and
               <i>
                 <b className="purple">
                   {" "}
-                  Modern Javascript Library and Frameworks
+                  Modern Javascript Frameworks
                 </b>
               </i>
               &nbsp; like
