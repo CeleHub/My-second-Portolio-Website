@@ -17,9 +17,9 @@ function AboutCard() {
             I am passionate about building high-quality software and am always looking for opportunities to learn new technologies and improve my skills.
             <br />
             <br />
-            I am currently employed as a software engineer at <span className="purple">GoPro Integrated Technologies</span>, Lagos.
+            I am currently employed as a <span className="purple">Software Engineer</span> at <span className="purple">GoPro Integrated Technologies</span>, Lagos.
             <br />
-            I am a Bachelor of Science degree holder in Computer Science with <span className="purple">first class honours</span>, since August 2026.
+            I am a <span className="purple">Bachelor of Science</span> degree holder in <span className="purple">Computer Science</span> with <span className="purple">First class honours</span>, since August 2026.
             <br />
             <br />
             Apart from coding and manipulating data, some other activities that I love to do are:
