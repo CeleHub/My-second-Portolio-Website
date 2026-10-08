@@ -87,7 +87,7 @@ function Contact() {
   return (
     <Container fluid className="contact-section">
       <Particle />
-      <Container>
+      <Container style={{ position: "relative", zIndex: 5 }}>
         <h1 className="project-heading">
           Get In <strong className="purple">Touch</strong>
         </h1>
