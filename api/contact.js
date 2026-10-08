@@ -30,6 +30,14 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRegex.test(String(email).trim())) {
+      return res.status(400).json({
+        error: "Please enter a valid email address so I can get back to you.",
+      });
+    }
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("RESEND_API_KEY environment variable is not configured.");
@@ -65,6 +73,7 @@ module.exports = async function handler(req, res) {
     // - From: [NAME] via your verified domain
     // - Subject: The actual subject from the form
     // - Reply-To: Client's direct email
+    // - Body: Direct message body with subtle footer (thread-safe for replies)
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -77,40 +86,10 @@ module.exports = async function handler(req, res) {
         reply_to: email,
         subject: cleanSubject || `New message from ${cleanName}`,
         html: `
-          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 32px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b;">
-            <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 24px;">
-              <h2 style="font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 6px 0; letter-spacing: -0.02em;">
-                New message from ${escapeHtml(cleanName)}
-              </h2>
-              <p style="font-size: 13px; color: #64748b; margin: 0; font-weight: 500;">
-                Received via celestineokonkwo.me
-              </p>
-            </div>
-            
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px;">
-              <tr>
-                <td style="padding: 10px 0; color: #64748b; width: 110px; font-weight: 600;">From:</td>
-                <td style="padding: 10px 0; color: #0f172a; font-weight: 600;">${escapeHtml(cleanName)}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; color: #64748b; font-weight: 600;">Email:</td>
-                <td style="padding: 10px 0; color: #0f172a;">
-                  <a href="mailto:${escapeHtml(email)}" style="color: #623686; text-decoration: none; font-weight: 600;">${escapeHtml(email)}</a>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; color: #64748b; font-weight: 600;">Subject:</td>
-                <td style="padding: 10px 0; color: #0f172a; font-weight: 500;">${escapeHtml(cleanSubject || "General Inquiry")}</td>
-              </tr>
-            </table>
-
-            <div style="margin-top: 16px;">
-              <p style="margin: 0 0 10px 0; color: #475569; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Message body</p>
-              <div style="background-color: #faf7fc; border: 1px solid #e9dff0; border-left: 4px solid #8a49a8; padding: 20px; border-radius: 6px; font-size: 15px; color: #1e293b; line-height: 1.65; white-space: pre-wrap;">${escapeHtml(message)}</div>
-            </div>
-
-            <div style="margin-top: 36px; padding-top: 20px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #94a3b8; text-align: right;">
-              celestineokonkwo.me
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 0; color: #1e293b; line-height: 1.7;">
+            <div style="white-space: pre-wrap; font-size: 16px; color: #0f172a; margin-bottom: 32px; line-height: 1.7;">${escapeHtml(message)}</div>
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 13px; color: #94a3b8;">
+              Sent via the contact form on <a href="https://www.celestineokonkwo.me" style="color: #623686; text-decoration: none; font-weight: 500;">celestineokonkwo.me</a>
             </div>
           </div>
         `,
@@ -121,8 +100,13 @@ module.exports = async function handler(req, res) {
 
     if (!resendResponse.ok) {
       console.error("Resend API Error:", data);
+      let userFriendlyError = "Unable to send your message right now. Please try again or reach out directly at celestine4321@gmail.com.";
+      const msg = (data.message || "").toLowerCase();
+      if (msg.includes("email") || msg.includes("reply_to")) {
+        userFriendlyError = "Please enter a valid email address so I can get back to you.";
+      }
       return res.status(resendResponse.status).json({
-        error: data.message || "Failed to deliver email through Resend.",
+        error: userFriendlyError,
       });
     }
 
@@ -130,6 +114,7 @@ module.exports = async function handler(req, res) {
     // - From: Celestine Okonkwo <contact@celestineokonkwo.me>
     // - Subject: I have received your message, [NAME]
     // - Reply-To: Your primary inbox so if client replies, you receive it directly
+    // - Body: Clean and direct acknowledgment starting with "Hi [NAME],"
     try {
       const primaryInbox = recipientEmails[0] || "celestine4321@gmail.com";
       await fetch("https://api.resend.com/emails", {
@@ -144,36 +129,21 @@ module.exports = async function handler(req, res) {
           reply_to: primaryInbox,
           subject: `I have received your message, ${cleanName}`,
           html: `
-            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 32px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b;">
-              <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 24px;">
-                <h2 style="font-size: 20px; font-weight: 700; color: #0f172a; margin: 0 0 6px 0; letter-spacing: -0.02em;">
-                  Thanks for reaching out!
-                </h2>
-                <p style="font-size: 13px; color: #64748b; margin: 0; font-weight: 500;">
-                  Celestine Okonkwo &bull; celestineokonkwo.me
-                </p>
-              </div>
-
-              <p style="color: #1e293b; font-size: 15px; line-height: 1.65; margin: 0 0 16px 0;">
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 0; color: #1e293b; line-height: 1.7;">
+              <p style="font-size: 16px; color: #0f172a; margin: 0 0 16px 0;">
                 Hi ${escapeHtml(cleanName)},
               </p>
-              <p style="color: #334155; font-size: 15px; line-height: 1.65; margin: 0 0 24px 0;">
-                Thank you for contacting me through my portfolio website (<a href="https://www.celestineokonkwo.me" style="color: #623686; text-decoration: none; font-weight: 500;">celestineokonkwo.me</a>). I have received your message and will review it and get back to you shortly.
+              <p style="font-size: 15px; color: #334155; margin: 0 0 24px 0; line-height: 1.65;">
+                This is an automated message acknowledging the contact form you just filled on my portfolio page. I have received your message and will get back to you shortly. Thank you for reaching out.
               </p>
-              
-              <div style="margin: 24px 0;">
-                <p style="margin: 0 0 10px 0; color: #475569; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Message body</p>
-                <div style="background-color: #faf7fc; border: 1px solid #e9dff0; border-left: 4px solid #8a49a8; padding: 20px; border-radius: 6px; font-size: 14px; color: #334155; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(message)}</div>
-              </div>
 
-              <div style="margin-top: 36px; padding-top: 24px; border-top: 1px solid #e2e8f0;">
-                <p style="color: #0f172a; font-size: 15px; font-weight: 700; margin: 0 0 2px 0;">
-                  Celestine Okonkwo
-                </p>
-                <p style="color: #64748b; font-size: 13px; margin: 0 0 8px 0; font-weight: 500;">
-                  Software Engineer
-                </p>
-                <p style="margin: 0;">
+              <div style="background-color: #faf7fc; border-left: 3px solid #8a49a8; padding: 18px 20px; border-radius: 4px; font-size: 15px; color: #334155; line-height: 1.65; white-space: pre-wrap; margin: 28px 0;">${escapeHtml(message)}</div>
+
+              <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #f1f5f9; line-height: 1.6;">
+                <p style="margin: 0; color: #475569; font-size: 14px;">Warm regards,</p>
+                <p style="margin: 4px 0 0 0; color: #0f172a; font-size: 16px; font-weight: 700;">Celestine Okonkwo</p>
+                <p style="margin: 0; color: #64748b; font-size: 13px;">Software Engineer</p>
+                <p style="margin: 2px 0 0 0;">
                   <a href="https://www.celestineokonkwo.me" style="color: #623686; font-size: 13px; text-decoration: none; font-weight: 500;">www.celestineokonkwo.me</a>
                 </p>
               </div>

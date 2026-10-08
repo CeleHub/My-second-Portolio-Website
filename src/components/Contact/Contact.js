@@ -42,6 +42,18 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Client-side email validation so users get instant, friendly feedback
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!formData.email || !emailRegex.test(formData.email.trim())) {
+      setStatus({
+        submitting: false,
+        success: false,
+        error: "Please enter a valid email address so I can get back to you.",
+      });
+      return;
+    }
+
     setStatus({ submitting: true, success: false, error: null });
 
     try {
@@ -71,7 +83,7 @@ function Contact() {
         setStatus({
           submitting: false,
           success: false,
-          error: data.error || "Failed to send message. Please try again or reach out directly via email.",
+          error: data.error || "Unable to send your message right now. Please try again or reach out directly via email.",
         });
       }
     } catch (err) {
@@ -79,7 +91,7 @@ function Contact() {
       setStatus({
         submitting: false,
         success: false,
-        error: "Unable to connect to the mail server. Please try again or email me directly.",
+        error: "Unable to connect to the mail server. Please check your connection or reach out directly via email.",
       });
     }
   };
@@ -206,7 +218,7 @@ function Contact() {
 
               {status.success && (
                 <Alert variant="success" className="contact-alert">
-                  <strong>Success!</strong> Your message has been sent directly to my inbox. I'll get back to you shortly!
+                  Thanks for reaching out, I'll respond to you shortly.
                 </Alert>
               )}
 
