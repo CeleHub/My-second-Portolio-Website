@@ -23,12 +23,42 @@ function Footer() {
           <ul className="footer-icons">
             <li className="social-icons">
               <a
+                href="https://wa.me/2349122651327"
+                style={{ color: "white" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp />
+              </a>
+            </li>
+            <li className="social-icons">
+              <a
+                href="https://t.me/jesuiscelestine"
+                style={{ color: "white" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTelegramPlane />
+              </a>
+            </li>
+            <li className="social-icons">
+              <a
                 href="https://github.com/CeleHub"
                 style={{ color: "white" }}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <AiFillGithub />
+              </a>
+            </li>
+            <li className="social-icons">
+              <a
+                href="https://www.instagram.com/jesuiscelestine_/"
+                style={{ color: "white" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <AiFillInstagram />
               </a>
             </li>
             <li className="social-icons">
@@ -49,36 +79,6 @@ function Footer() {
                 rel="noopener noreferrer"
               >
                 <FaLinkedinIn />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://www.instagram.com/jesuiscelestine_/"
-                style={{ color: "white" }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AiFillInstagram />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://wa.me/2349122651327"
-                style={{ color: "white" }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaWhatsapp />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://t.me/jesuiscelestine"
-                style={{ color: "white" }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTelegramPlane />
               </a>
             </li>
           </ul>

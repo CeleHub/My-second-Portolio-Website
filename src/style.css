@@ -861,12 +861,19 @@ button:focus {
 }
 
 .contact-social-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 0;
-  list-style: none;
-  margin-top: 10px;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 0 !important;
+  list-style: none !important;
+  margin-top: 10px !important;
+}
+
+.contact-social-links .social-icons {
+  display: inline-flex !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .contact-label {

@@ -67,12 +67,42 @@ function Home2() {
             <ul className="home-about-social-links">
               <li className="social-icons">
                 <a
+                  href="https://wa.me/2349122651327"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <FaWhatsapp />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
+                  href="https://t.me/jesuiscelestine"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <FaTelegramPlane />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
                   href="https://github.com/CeleHub"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="icon-colour  home-social-icons"
+                  className="icon-colour home-social-icons"
                 >
                   <AiFillGithub />
+                </a>
+              </li>
+              <li className="social-icons">
+                <a
+                  href="https://www.instagram.com/jesuiscelestine_/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="icon-colour home-social-icons"
+                >
+                  <AiFillInstagram />
                 </a>
               </li>
               <li className="social-icons">
@@ -93,36 +123,6 @@ function Home2() {
                   className="icon-colour home-social-icons"
                 >
                   <FaLinkedinIn />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://www.instagram.com/jesuiscelestine_/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <AiFillInstagram />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://wa.me/2349122651327"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <FaWhatsapp />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://t.me/jesuiscelestine"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <FaTelegramPlane />
                 </a>
               </li>
             </ul>

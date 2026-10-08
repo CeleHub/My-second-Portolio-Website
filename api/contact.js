@@ -38,8 +38,12 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Configurable recipient email (defaults to Celestine's email if not set in Vercel env)
-    const recipientEmail = process.env.CONTACT_RECEIVER_EMAIL || "celestine4321@gmail.com";
+    // Configurable recipient emails (comma-separated list, defaults to Celestine's email)
+    const recipientEmails = (process.env.CONTACT_RECEIVER_EMAIL || "celestine4321@gmail.com")
+      .split(",")
+      .map((e) => e.trim())
+      .filter(Boolean);
+
     const senderEmail = process.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@celestineokonkwo.me>";
 
     const escapeHtml = (text) => {
@@ -51,6 +55,7 @@ module.exports = async function handler(req, res) {
         .replace(/'/g, "&#039;");
     };
 
+    // 1. Deliver the message to your inbox(es)
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -59,7 +64,7 @@ module.exports = async function handler(req, res) {
       },
       body: JSON.stringify({
         from: senderEmail,
-        to: [recipientEmail],
+        to: recipientEmails,
         reply_to: email,
         subject: `[Portfolio Contact] ${subject || "New Message from " + name}`,
         html: `
@@ -104,6 +109,47 @@ module.exports = async function handler(req, res) {
       return res.status(resendResponse.status).json({
         error: data.message || "Failed to deliver email through Resend.",
       });
+    }
+
+    // 2. Send an automated confirmation receipt back to the visitor
+    try {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: senderEmail,
+          to: [email],
+          subject: `Thanks for reaching out, ${name}! - Celestine Okonkwo`,
+          html: `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; border: 1px solid #e0e0e0; border-radius: 8px;">
+              <div style="border-bottom: 2px solid #8a49a8; padding-bottom: 12px; margin-bottom: 20px;">
+                <h2 style="color: #623686; margin: 0;">Thanks for reaching out!</h2>
+              </div>
+              <p style="color: #333; font-size: 15px; line-height: 1.6;">Hi ${escapeHtml(name)},</p>
+              <p style="color: #333; font-size: 15px; line-height: 1.6;">
+                Thank you for contacting me through my portfolio website (<a href="https://www.celestineokonkwo.me" style="color: #8a49a8; text-decoration: none;">celestineokonkwo.me</a>). I have received your message and will review it and get back to you shortly.
+              </p>
+              
+              <div style="background-color: #f7f4fa; border-left: 4px solid #8a49a8; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                <p style="margin: 0; color: #555; font-size: 13px; font-weight: bold;">Summary of what you sent:</p>
+                <p style="margin: 6px 0 0 0; color: #333; font-size: 14px; white-space: pre-wrap;">${escapeHtml(message)}</p>
+              </div>
+
+              <p style="color: #444; font-size: 14px; line-height: 1.6; margin-top: 25px;">
+                Warm regards,<br />
+                <strong style="color: #623686; font-size: 16px;">Celestine Okonkwo</strong><br />
+                <span style="color: #777; font-size: 13px;">Software Engineer</span><br />
+                <a href="https://www.celestineokonkwo.me" style="color: #8a49a8; font-size: 13px; text-decoration: none;">www.celestineokonkwo.me</a>
+              </p>
+            </div>
+          `,
+        }),
+      });
+    } catch (autoReplyErr) {
+      console.error("Non-fatal auto-reply error:", autoReplyErr);
     }
 
     return res.status(200).json({

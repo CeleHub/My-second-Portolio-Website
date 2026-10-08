@@ -131,43 +131,29 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">
-                  <FaWhatsapp />
-                </div>
-                <div>
-                  <div className="contact-detail-label">WhatsApp</div>
-                  <a
-                    href="https://wa.me/2349122651327"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="contact-detail-value"
-                  >
-                    Chat on WhatsApp
-                  </a>
-                </div>
-              </div>
-
-              <div className="contact-detail-item">
-                <div className="contact-detail-icon">
-                  <FaTelegramPlane />
-                </div>
-                <div>
-                  <div className="contact-detail-label">Telegram</div>
-                  <a
-                    href="https://t.me/jesuiscelestine"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="contact-detail-value"
-                  >
-                    @jesuiscelestine
-                  </a>
-                </div>
-              </div>
-
               <div style={{ marginTop: "35px" }}>
                 <h5 style={{ color: "white", marginBottom: "15px" }}>Connect on Socials</h5>
                 <ul className="contact-social-links">
+                  <li className="social-icons">
+                    <a
+                      href="https://wa.me/2349122651327"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="icon-colour home-social-icons"
+                    >
+                      <FaWhatsapp />
+                    </a>
+                  </li>
+                  <li className="social-icons">
+                    <a
+                      href="https://t.me/jesuiscelestine"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="icon-colour home-social-icons"
+                    >
+                      <FaTelegramPlane />
+                    </a>
+                  </li>
                   <li className="social-icons">
                     <a
                       href="https://github.com/CeleHub"
@@ -176,6 +162,16 @@ function Contact() {
                       className="icon-colour home-social-icons"
                     >
                       <AiFillGithub />
+                    </a>
+                  </li>
+                  <li className="social-icons">
+                    <a
+                      href="https://www.instagram.com/jesuiscelestine_/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="icon-colour home-social-icons"
+                    >
+                      <AiFillInstagram />
                     </a>
                   </li>
                   <li className="social-icons">
@@ -196,36 +192,6 @@ function Contact() {
                       className="icon-colour home-social-icons"
                     >
                       <FaLinkedinIn />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="https://www.instagram.com/jesuiscelestine_/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                    >
-                      <AiFillInstagram />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="https://wa.me/2348123456789"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                    >
-                      <FaWhatsapp />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="https://t.me/jesuiscelestine"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                    >
-                      <FaTelegramPlane />
                     </a>
                   </li>
                 </ul>
