@@ -40,7 +40,7 @@ module.exports = async function handler(req, res) {
 
     // Configurable recipient email (defaults to Celestine's email if not set in Vercel env)
     const recipientEmail = process.env.CONTACT_RECEIVER_EMAIL || "celestine4321@gmail.com";
-    const senderEmail = process.env.RESEND_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";
+    const senderEmail = process.env.RESEND_FROM_EMAIL || "Portfolio Contact <contact@celestineokonkwo.me>";
 
     const escapeHtml = (text) => {
       return String(text)

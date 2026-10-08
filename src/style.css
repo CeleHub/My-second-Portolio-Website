@@ -756,20 +756,20 @@ button:focus {
 
 .contact-card,
 .contact-form-card {
-  background: rgba(22, 16, 38, 0.75) !important;
-  border: 1.5px solid rgba(178, 121, 216, 0.3) !important;
-  box-shadow: 0 8px 32px 0 rgba(98, 54, 134, 0.3) !important;
-  border-radius: 14px !important;
+  background: transparent !important;
+  border: 1px solid rgba(138, 73, 168, 0.4) !important;
+  box-shadow: 0 4px 5px 3px rgba(119, 53, 136, 0.459) !important;
+  border-radius: 10px !important;
   padding: 35px !important;
-  backdrop-filter: blur(12px) !important;
   text-align: left !important;
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.5s ease 0s !important;
 }
 
 .contact-card:hover,
 .contact-form-card:hover {
+  transform: scale(1.01) !important;
   border-color: rgba(199, 112, 240, 0.6) !important;
-  box-shadow: 0 10px 35px 0 rgba(144, 60, 192, 0.4) !important;
+  box-shadow: 0 4px 4px 5px rgba(129, 72, 144, 0.561) !important;
 }
 
 .contact-card-title {
@@ -790,9 +790,9 @@ button:focus {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(46, 204, 113, 0.12);
-  border: 1px solid rgba(46, 204, 113, 0.4);
-  color: #2ecc71;
+  background: rgba(147, 76, 206, 0.15);
+  border: 1px solid rgba(199, 112, 240, 0.4);
+  color: #c770f0;
   padding: 8px 16px;
   border-radius: 30px;
   font-size: 0.9em;
@@ -803,21 +803,21 @@ button:focus {
 .pulse-indicator {
   width: 10px;
   height: 10px;
-  background: #2ecc71;
+  background: #c770f0;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+  box-shadow: 0 0 0 0 rgba(199, 112, 240, 0.6);
   animation: pulse 1.8s infinite;
 }
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    box-shadow: 0 0 0 0 rgba(199, 112, 240, 0.6);
   }
   70% {
-    box-shadow: 0 0 0 8px rgba(46, 204, 113, 0);
+    box-shadow: 0 0 0 8px rgba(199, 112, 240, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    box-shadow: 0 0 0 0 rgba(199, 112, 240, 0);
   }
 }
 
@@ -862,6 +862,7 @@ button:focus {
 
 .contact-social-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   padding: 0;
   list-style: none;
@@ -877,10 +878,10 @@ button:focus {
 }
 
 .contact-input {
-  background: rgba(15, 10, 27, 0.75) !important;
-  border: 1.5px solid rgba(162, 77, 211, 0.35) !important;
+  background: rgba(15, 10, 27, 0.5) !important;
+  border: 1px solid rgba(162, 77, 211, 0.35) !important;
   color: #ffffff !important;
-  border-radius: 8px !important;
+  border-radius: 6px !important;
   padding: 12px 16px !important;
   font-size: 1rem !important;
   transition: all 0.25s ease-in-out !important;
@@ -891,28 +892,30 @@ button:focus {
 }
 
 .contact-input:focus {
-  background: rgba(20, 13, 36, 0.95) !important;
+  background: rgba(20, 13, 36, 0.75) !important;
   border-color: #cd5ff8 !important;
-  box-shadow: 0 0 10px rgba(205, 95, 248, 0.35) !important;
+  box-shadow: none !important;
+  outline: none !important;
   color: white !important;
 }
 
 .contact-submit-btn {
-  background: linear-gradient(135deg, #7d2ae8, #a24dd3) !important;
-  border: none !important;
+  background-color: #623686 !important;
+  border-color: #623686 !important;
+  color: #fff !important;
   padding: 12px 32px !important;
   font-size: 1.05em !important;
   font-weight: 600 !important;
-  border-radius: 8px !important;
+  border-radius: 6px !important;
   width: 100% !important;
   transition: all 0.3s ease-in-out !important;
-  box-shadow: 0 4px 15px rgba(125, 42, 232, 0.4) !important;
+  box-shadow: none !important;
 }
 
 .contact-submit-btn:hover:not(:disabled) {
+  background-color: #6d20c5d7 !important;
+  border-color: #6d20c5d7 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(162, 77, 211, 0.6) !important;
-  background: linear-gradient(135deg, #8a35f5, #b45de6) !important;
 }
 
 .contact-submit-btn:disabled {

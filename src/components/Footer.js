@@ -2,10 +2,10 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import {
   AiFillGithub,
-  AiOutlineTwitter,
   AiFillInstagram,
 } from "react-icons/ai";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaWhatsapp, FaTelegramPlane } from "react-icons/fa";
+import XIcon from "./XIcon";
 
 function Footer() {
   let date = new Date();
@@ -38,7 +38,7 @@ function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <AiOutlineTwitter />
+                <XIcon />
               </a>
             </li>
             <li className="social-icons">
@@ -59,6 +59,26 @@ function Footer() {
                 rel="noopener noreferrer"
               >
                 <AiFillInstagram />
+              </a>
+            </li>
+            <li className="social-icons">
+              <a
+                href="https://wa.me/2349122651327"
+                style={{ color: "white" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp />
+              </a>
+            </li>
+            <li className="social-icons">
+              <a
+                href="https://t.me/jesuiscelestine"
+                style={{ color: "white" }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaTelegramPlane />
               </a>
             </li>
           </ul>
