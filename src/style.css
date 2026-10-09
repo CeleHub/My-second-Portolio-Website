@@ -958,6 +958,154 @@ button:focus {
   margin-bottom: 20px !important;
 }
 
+/* Alternative Contact Section Styles */
+.contact-alt-toggle-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #c770f0 !important;
+  font-size: 0.9em !important;
+  font-weight: 500 !important;
+  padding: 4px 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.contact-alt-toggle-btn:hover {
+  color: #e2a8f8 !important;
+  text-decoration: underline !important;
+}
+
+.contact-alt-box {
+  background: rgba(18, 11, 33, 0.6) !important;
+  border: 1px dashed rgba(162, 77, 211, 0.45) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  margin-top: 5px !important;
+}
+
+.contact-alt-box-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 12px !important;
+}
+
+.contact-alt-box-title {
+  color: #e2d9ec !important;
+  font-size: 0.9em !important;
+  font-weight: 600 !important;
+}
+
+.contact-alt-box-optional {
+  color: #9a88ad !important;
+  font-weight: normal !important;
+}
+
+.contact-alt-close-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #9a88ad !important;
+  font-size: 0.9em !important;
+  cursor: pointer !important;
+  padding: 2px 6px !important;
+  transition: color 0.2s ease !important;
+}
+
+.contact-alt-close-btn:hover {
+  color: #ff8888 !important;
+}
+
+.contact-alt-row {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+  margin-bottom: 10px !important;
+}
+
+.contact-alt-select {
+  background: rgba(20, 13, 36, 0.85) !important;
+  border: 1px solid rgba(162, 77, 211, 0.35) !important;
+  color: #ffffff !important;
+  border-radius: 6px !important;
+  padding: 10px 12px !important;
+  font-size: 0.95em !important;
+  width: 140px !important;
+  flex-shrink: 0 !important;
+}
+
+.contact-alt-select:focus {
+  border-color: #cd5ff8 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.contact-alt-select option {
+  background: #1b1429 !important;
+  color: white !important;
+}
+
+.contact-alt-custom-input {
+  width: 130px !important;
+  flex-shrink: 0 !important;
+}
+
+.contact-alt-input {
+  flex: 1 !important;
+}
+
+.contact-alt-remove-btn {
+  background: transparent !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+  color: #f87171 !important;
+  border-radius: 6px !important;
+  padding: 9px 12px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.contact-alt-remove-btn:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(239, 68, 68, 0.6) !important;
+}
+
+.contact-alt-add-btn {
+  background: rgba(147, 76, 206, 0.15) !important;
+  border: 1px solid rgba(199, 112, 240, 0.4) !important;
+  color: #c770f0 !important;
+  font-size: 0.85em !important;
+  font-weight: 500 !important;
+  border-radius: 20px !important;
+  padding: 5px 14px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-top: 4px !important;
+  transition: all 0.2s ease !important;
+}
+
+.contact-alt-add-btn:hover {
+  background: rgba(147, 76, 206, 0.3) !important;
+  color: white !important;
+  border-color: rgba(199, 112, 240, 0.7) !important;
+}
+
+@media (max-width: 576px) {
+  .contact-alt-row {
+    flex-wrap: wrap !important;
+  }
+  .contact-alt-select,
+  .contact-alt-custom-input {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 767px) {
   .contact-info-col {
     margin-bottom: 30px;

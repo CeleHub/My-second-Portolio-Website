@@ -5,6 +5,8 @@ import {
   AiOutlineMail,
   AiOutlineUser,
   AiOutlineMessage,
+  AiOutlinePlus,
+  AiOutlineClose,
   AiFillGithub,
   AiFillInstagram,
 } from "react-icons/ai";
@@ -26,11 +28,46 @@ function Contact() {
     message: "",
   });
 
+  const [altContacts, setAltContacts] = useState([]);
+  const [showAltContacts, setShowAltContacts] = useState(false);
+
   const [status, setStatus] = useState({
     submitting: false,
     success: false,
     error: null,
   });
+
+  const handleToggleAltContacts = () => {
+    if (!showAltContacts && altContacts.length === 0) {
+      setAltContacts([{ id: Date.now(), platform: "WhatsApp", customPlatform: "", handle: "" }]);
+    }
+    setShowAltContacts((prev) => !prev);
+  };
+
+  const handleAddAltContact = () => {
+    if (altContacts.length < 5) {
+      setAltContacts((prev) => [
+        ...prev,
+        { id: Date.now() + Math.random(), platform: "WhatsApp", customPlatform: "", handle: "" },
+      ]);
+    }
+  };
+
+  const handleRemoveAltContact = (id) => {
+    setAltContacts((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      if (updated.length === 0) {
+        setShowAltContacts(false);
+      }
+      return updated;
+    });
+  };
+
+  const handleAltContactChange = (id, field, value) => {
+    setAltContacts((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, [field]: value } : item))
+    );
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +91,32 @@ function Contact() {
       return;
     }
 
+    if (formData.name.trim().length < 2) {
+      setStatus({
+        submitting: false,
+        success: false,
+        error: "Please enter your name (at least 2 characters).",
+      });
+      return;
+    }
+
+    if (formData.message.trim().length < 10) {
+      setStatus({
+        submitting: false,
+        success: false,
+        error: "Please enter a message with at least 10 characters.",
+      });
+      return;
+    }
+
     setStatus({ submitting: true, success: false, error: null });
+
+    const formattedAltContacts = altContacts
+      .filter((c) => c.handle && c.handle.trim().length > 0)
+      .map((c) => ({
+        platform: c.platform === "Other" ? (c.customPlatform.trim() || "Other") : c.platform,
+        handle: c.handle.trim(),
+      }));
 
     try {
       const response = await fetch("/api/contact", {
@@ -62,7 +124,10 @@ function Contact() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          altContacts: formattedAltContacts,
+        }),
       });
 
       const data = await response.json();
@@ -79,6 +144,8 @@ function Contact() {
           subject: "",
           message: "",
         });
+        setAltContacts([]);
+        setShowAltContacts(false);
       } else {
         setStatus({
           submitting: false,
@@ -242,6 +309,8 @@ function Contact() {
                         onChange={handleChange}
                         placeholder="John Doe"
                         required
+                        minLength={2}
+                        maxLength={60}
                         className="contact-input"
                       />
                     </Form.Group>
@@ -259,11 +328,115 @@ function Contact() {
                         onChange={handleChange}
                         placeholder="john@example.com"
                         required
+                        minLength={5}
+                        maxLength={100}
                         className="contact-input"
                       />
                     </Form.Group>
                   </Col>
                 </Row>
+
+                {/* Collapsible Alternative Contact Section */}
+                <div className="mb-3">
+                  {!showAltContacts ? (
+                    <button
+                      type="button"
+                      className="contact-alt-toggle-btn"
+                      onClick={handleToggleAltContacts}
+                    >
+                      <AiOutlinePlus style={{ marginRight: "5px" }} /> Add alternative contact method (WhatsApp, Telegram, etc.)
+                    </button>
+                  ) : (
+                    <div className="contact-alt-box">
+                      <div className="contact-alt-box-header">
+                        <span className="contact-alt-box-title">
+                          Alternative Contact Methods{" "}
+                          <span className="contact-alt-box-optional">(Optional)</span>
+                        </span>
+                        <button
+                          type="button"
+                          className="contact-alt-close-btn"
+                          onClick={() => setShowAltContacts(false)}
+                          title="Hide alternative contacts"
+                        >
+                          <AiOutlineClose />
+                        </button>
+                      </div>
+
+                      {altContacts.map((contact) => (
+                        <div key={contact.id} className="contact-alt-row">
+                          <Form.Select
+                            className="contact-alt-select"
+                            value={contact.platform}
+                            onChange={(e) =>
+                              handleAltContactChange(contact.id, "platform", e.target.value)
+                            }
+                          >
+                            <option value="WhatsApp">WhatsApp</option>
+                            <option value="Telegram">Telegram</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="X (Twitter)">X (Twitter)</option>
+                            <option value="WeChat">WeChat</option>
+                            <option value="Discord">Discord</option>
+                            <option value="Phone">Phone</option>
+                            <option value="Other">Other</option>
+                          </Form.Select>
+
+                          {contact.platform === "Other" && (
+                            <Form.Control
+                              type="text"
+                              className="contact-input contact-alt-custom-input"
+                              placeholder="Platform name"
+                              maxLength={30}
+                              value={contact.customPlatform}
+                              onChange={(e) =>
+                                handleAltContactChange(
+                                  contact.id,
+                                  "customPlatform",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          )}
+
+                          <Form.Control
+                            type="text"
+                            className="contact-input contact-alt-input"
+                            placeholder={
+                              contact.platform === "WhatsApp" || contact.platform === "Phone"
+                                ? "e.g. +234 912 265 1327"
+                                : "e.g. @username or profile URL"
+                            }
+                            maxLength={100}
+                            value={contact.handle}
+                            onChange={(e) =>
+                              handleAltContactChange(contact.id, "handle", e.target.value)
+                            }
+                          />
+
+                          <button
+                            type="button"
+                            className="contact-alt-remove-btn"
+                            onClick={() => handleRemoveAltContact(contact.id)}
+                            title="Remove"
+                          >
+                            <AiOutlineClose />
+                          </button>
+                        </div>
+                      ))}
+
+                      {altContacts.length < 5 && (
+                        <button
+                          type="button"
+                          className="contact-alt-add-btn"
+                          onClick={handleAddAltContact}
+                        >
+                          <AiOutlinePlus style={{ marginRight: "4px" }} /> Add another platform
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
 
                 <Form.Group className="mb-3" controlId="formSubject">
                   <Form.Label className="contact-label">
@@ -275,6 +448,7 @@ function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Project Inquiry / Job Opportunity"
+                    maxLength={120}
                     className="contact-input"
                   />
                 </Form.Group>
@@ -291,6 +465,8 @@ function Contact() {
                     onChange={handleChange}
                     placeholder="Hi Celestine, I came across your portfolio and wanted to reach out regarding..."
                     required
+                    minLength={10}
+                    maxLength={4000}
                     className="contact-input"
                   />
                 </Form.Group>

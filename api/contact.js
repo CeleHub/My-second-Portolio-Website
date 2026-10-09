@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { name, email, subject, message } = req.body || {};
+    const { name, email, subject, message, altContacts } = req.body || {};
 
     if (!name || !email || !message) {
       return res.status(400).json({
@@ -60,6 +60,16 @@ module.exports = async function handler(req, res) {
     const cleanName = (name || "Visitor").replace(/[<>\r\n]/g, "").trim();
     const cleanSubject = subject ? subject.replace(/[\r\n]/g, "").trim() : "";
 
+    // Parse and sanitize alternative contact methods if provided
+    const formattedAltContacts = Array.isArray(altContacts)
+      ? altContacts
+          .filter((c) => c && typeof c.handle === "string" && c.handle.trim().length > 0)
+          .map((c) => ({
+            platform: String(c.platform || "Contact").trim().slice(0, 30),
+            handle: String(c.handle).trim().slice(0, 100),
+          }))
+      : [];
+
     const escapeHtml = (text) => {
       return String(text)
         .replace(/&/g, "&amp;")
@@ -68,6 +78,22 @@ module.exports = async function handler(req, res) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     };
+
+    const altContactsHtml =
+      formattedAltContacts.length > 0
+        ? `
+          <div style="background-color: #faf7fc; border: 1px solid #e9dff0; border-radius: 6px; padding: 12px 16px; margin-bottom: 28px; font-size: 14px; color: #334155;">
+            <strong style="color: #623686;">Alternative Contact:</strong> ${formattedAltContacts
+              .map(
+                (c) =>
+                  `${escapeHtml(c.platform)}: <strong>${escapeHtml(
+                    c.handle
+                  )}</strong>`
+              )
+              .join(" &bull; ")}
+          </div>
+        `
+        : "";
 
     // 1. Deliver the notification to your inbox(es)
     // - From: [NAME] via your verified domain
@@ -87,7 +113,8 @@ module.exports = async function handler(req, res) {
         subject: cleanSubject || `New message from ${cleanName}`,
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px 0; color: #1e293b; line-height: 1.7;">
-            <div style="white-space: pre-wrap; font-size: 16px; color: #0f172a; margin-bottom: 32px; line-height: 1.7;">${escapeHtml(message)}</div>
+            <div style="white-space: pre-wrap; font-size: 16px; color: #0f172a; margin-bottom: 28px; line-height: 1.7;">${escapeHtml(message)}</div>
+            ${altContactsHtml}
             <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 13px; color: #94a3b8;">
               Sent via the contact form on <a href="https://www.celestineokonkwo.me" style="color: #623686; text-decoration: none; font-weight: 500;">celestineokonkwo.me</a>
             </div>
@@ -153,6 +180,116 @@ module.exports = async function handler(req, res) {
       });
     } catch (autoReplyErr) {
       console.error("Non-fatal auto-reply error:", autoReplyErr);
+    }
+
+    // 3. Dispatch Instant Mobile Alerts (Twilio WhatsApp & Telegram Bot)
+    const alertPromises = [];
+
+    // A. Twilio WhatsApp Alert
+    if (
+      process.env.TWILIO_ACCOUNT_SID &&
+      process.env.TWILIO_AUTH_TOKEN &&
+      process.env.MY_WHATSAPP_NUMBER
+    ) {
+      alertPromises.push(
+        (async () => {
+          try {
+            const twilioSid = process.env.TWILIO_ACCOUNT_SID.trim();
+            const twilioToken = process.env.TWILIO_AUTH_TOKEN.trim();
+            const twilioFrom = (
+              process.env.TWILIO_WHATSAPP_FROM || "whatsapp:+14155238886"
+            ).trim();
+            let twilioTo = process.env.MY_WHATSAPP_NUMBER.trim();
+            if (!twilioTo.startsWith("whatsapp:")) {
+              twilioTo = `whatsapp:${twilioTo}`;
+            }
+
+            let waBody = `🔔 *New Portfolio Message*\n\n*From:* ${cleanName}\n*Email:* ${email}\n*Subject:* ${
+              cleanSubject || "General Inquiry"
+            }`;
+            if (formattedAltContacts.length > 0) {
+              waBody += `\n*Alt Contact:* ${formattedAltContacts
+                .map((c) => `${c.platform}: ${c.handle}`)
+                .join(", ")}`;
+            }
+            waBody += `\n\n*Message:*\n${message}`;
+
+            const params = new URLSearchParams();
+            params.append("From", twilioFrom);
+            params.append("To", twilioTo);
+            params.append("Body", waBody);
+
+            const twilioRes = await fetch(
+              `https://api.twilio.com/2010-04-01/Accounts/${twilioSid}/Messages.json`,
+              {
+                method: "POST",
+                headers: {
+                  Authorization:
+                    "Basic " +
+                    Buffer.from(`${twilioSid}:${twilioToken}`).toString("base64"),
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: params.toString(),
+              }
+            );
+
+            if (!twilioRes.ok) {
+              const twilioErr = await twilioRes.json();
+              console.error("Twilio WhatsApp Error:", twilioErr);
+            }
+          } catch (twErr) {
+            console.error("Twilio WhatsApp Dispatch Error:", twErr);
+          }
+        })()
+      );
+    }
+
+    // B. Telegram Bot Alert
+    if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
+      alertPromises.push(
+        (async () => {
+          try {
+            const botToken = process.env.TELEGRAM_BOT_TOKEN.trim();
+            const chatId = process.env.TELEGRAM_CHAT_ID.trim();
+
+            let tgText = `🔔 <b>New Portfolio Message</b>\n\n<b>From:</b> ${escapeHtml(
+              cleanName
+            )}\n<b>Email:</b> ${escapeHtml(email)}\n<b>Subject:</b> ${escapeHtml(
+              cleanSubject || "General Inquiry"
+            )}`;
+            if (formattedAltContacts.length > 0) {
+              tgText += `\n<b>Alt Contact:</b> ${formattedAltContacts
+                .map((c) => `${escapeHtml(c.platform)}: ${escapeHtml(c.handle)}`)
+                .join(", ")}`;
+            }
+            tgText += `\n\n<b>Message:</b>\n${escapeHtml(message)}`;
+
+            const tgRes = await fetch(
+              `https://api.telegram.org/bot${botToken}/sendMessage`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  chat_id: chatId,
+                  text: tgText,
+                  parse_mode: "HTML",
+                }),
+              }
+            );
+
+            if (!tgRes.ok) {
+              const tgErr = await tgRes.json();
+              console.error("Telegram Bot Error:", tgErr);
+            }
+          } catch (tgErr) {
+            console.error("Telegram Dispatch Error:", tgErr);
+          }
+        })()
+      );
+    }
+
+    if (alertPromises.length > 0) {
+      await Promise.allSettled(alertPromises);
     }
 
     return res.status(200).json({
