@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert, Modal } from "react-bootstrap";
 import Particle from "../Particle";
 import {
   AiOutlineMail,
@@ -7,6 +7,7 @@ import {
   AiOutlineMessage,
   AiOutlinePlus,
   AiOutlineClose,
+  AiOutlineEdit,
   AiFillGithub,
   AiFillInstagram,
 } from "react-icons/ai";
@@ -30,6 +31,7 @@ function Contact() {
 
   const [altContacts, setAltContacts] = useState([]);
   const [showAltContacts, setShowAltContacts] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const [status, setStatus] = useState({
     submitting: false,
@@ -77,7 +79,8 @@ function Contact() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  // Step 1: Client validation, then open review modal
+  const handleOpenReview = (e) => {
     e.preventDefault();
 
     // Client-side email validation so users get instant, friendly feedback
@@ -109,6 +112,13 @@ function Contact() {
       return;
     }
 
+    // Clear any previous error and open review modal
+    setStatus((prev) => ({ ...prev, error: null }));
+    setShowConfirmModal(true);
+  };
+
+  // Step 2: Final submission after user confirms details in modal
+  const handleFinalSubmit = async () => {
     setStatus({ submitting: true, success: false, error: null });
 
     const formattedAltContacts = altContacts
@@ -146,12 +156,14 @@ function Contact() {
         });
         setAltContacts([]);
         setShowAltContacts(false);
+        setShowConfirmModal(false);
       } else {
         setStatus({
           submitting: false,
           success: false,
           error: data.error || "Unable to send your message right now. Please try again or reach out directly via email.",
         });
+        setShowConfirmModal(false);
       }
     } catch (err) {
       console.error("Submission error:", err);
@@ -160,6 +172,7 @@ function Contact() {
         success: false,
         error: "Unable to connect to the mail server. Please check your connection or reach out directly via email.",
       });
+      setShowConfirmModal(false);
     }
   };
 
@@ -295,7 +308,7 @@ function Contact() {
                 </Alert>
               )}
 
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleOpenReview}>
                 <Row>
                   <Col md={6}>
                     <Form.Group className="mb-3" controlId="formName">
@@ -404,8 +417,8 @@ function Contact() {
                             className="contact-input contact-alt-input"
                             placeholder={
                               contact.platform === "WhatsApp" || contact.platform === "Phone"
-                                ? "e.g. +234 912 265 1327"
-                                : "e.g. @username or profile URL"
+                                ? "e.g. +234 912 265 1327 or number"
+                                : "number, @username or profile URL"
                             }
                             maxLength={100}
                             value={contact.handle}
@@ -484,6 +497,82 @@ function Contact() {
           </Col>
         </Row>
       </Container>
+
+      {/* Review & Confirmation Modal */}
+      <Modal
+        show={showConfirmModal}
+        onHide={() => !status.submitting && setShowConfirmModal(false)}
+        centered
+        className="contact-modal"
+      >
+        <Modal.Header closeButton={!status.submitting}>
+          <Modal.Title>Review & Confirm Your Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="contact-review-item">
+            <div className="contact-review-label">Your Name</div>
+            <div className="contact-review-value">{formData.name}</div>
+          </div>
+
+          <div className="contact-review-item">
+            <div className="contact-review-label">Your Email (Confirmation Sent Here)</div>
+            <div className="contact-review-value" style={{ color: "#cd5ff8", fontWeight: 600 }}>
+              {formData.email}
+            </div>
+          </div>
+
+          {formData.subject && (
+            <div className="contact-review-item">
+              <div className="contact-review-label">Subject</div>
+              <div className="contact-review-value">{formData.subject}</div>
+            </div>
+          )}
+
+          {altContacts.filter((c) => c.handle && c.handle.trim()).length > 0 && (
+            <div className="contact-review-item">
+              <div className="contact-review-label">Alternative Contacts</div>
+              <div className="contact-review-value">
+                {altContacts
+                  .filter((c) => c.handle && c.handle.trim())
+                  .map((c, idx) => (
+                    <span key={idx} style={{ display: "block" }}>
+                      <strong>{c.platform === "Other" ? (c.customPlatform || "Other") : c.platform}:</strong>{" "}
+                      {c.handle}
+                    </span>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          <div className="contact-review-item">
+            <div className="contact-review-label">Message</div>
+            <div className="contact-review-message">{formData.message}</div>
+          </div>
+
+          <p className="contact-review-note">
+            Please verify that your email address and details are correct before sending.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            className="contact-modal-edit-btn"
+            disabled={status.submitting}
+            onClick={() => setShowConfirmModal(false)}
+          >
+            <AiOutlineEdit style={{ marginRight: "6px" }} /> Edit Details
+          </Button>
+          <Button
+            variant="primary"
+            className="contact-modal-send-btn"
+            disabled={status.submitting}
+            onClick={handleFinalSubmit}
+          >
+            <FaPaperPlane style={{ marginRight: "6px" }} />
+            {status.submitting ? "Sending..." : "Confirm & Send"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

@@ -1025,14 +1025,22 @@ button:focus {
 }
 
 .contact-alt-select {
-  background: rgba(20, 13, 36, 0.85) !important;
+  background-color: rgba(20, 13, 36, 0.85) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23cd5ff8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 14px 12px !important;
   border: 1px solid rgba(162, 77, 211, 0.35) !important;
   color: #ffffff !important;
   border-radius: 6px !important;
-  padding: 10px 12px !important;
+  padding: 10px 30px 10px 12px !important;
   font-size: 0.95em !important;
-  width: 140px !important;
+  width: 155px !important;
   flex-shrink: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  cursor: pointer !important;
 }
 
 .contact-alt-select:focus {
@@ -1094,6 +1102,109 @@ button:focus {
   background: rgba(147, 76, 206, 0.3) !important;
   color: white !important;
   border-color: rgba(199, 112, 240, 0.7) !important;
+}
+
+/* Contact Review & Confirmation Modal */
+.contact-modal .modal-content {
+  background: #181126 !important;
+  border: 1px solid rgba(199, 112, 240, 0.45) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(138, 73, 168, 0.35) !important;
+  color: #ffffff !important;
+}
+
+.contact-modal .modal-header {
+  border-bottom: 1px solid rgba(162, 77, 211, 0.25) !important;
+  padding: 20px 24px !important;
+}
+
+.contact-modal .modal-title {
+  color: #cd5ff8 !important;
+  font-size: 1.25em !important;
+  font-weight: 600 !important;
+}
+
+.contact-modal .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%) !important;
+}
+
+.contact-modal .modal-body {
+  padding: 24px !important;
+}
+
+.contact-review-item {
+  margin-bottom: 14px;
+  background: rgba(27, 18, 43, 0.65);
+  border: 1px solid rgba(162, 77, 211, 0.25);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.contact-review-label {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  color: #ab95bf;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-bottom: 4px;
+}
+
+.contact-review-value {
+  font-size: 1em;
+  color: #ffffff;
+  word-break: break-word;
+}
+
+.contact-review-message {
+  white-space: pre-wrap;
+  font-size: 0.95em;
+  color: #e2d9ec;
+  line-height: 1.6;
+}
+
+.contact-review-note {
+  font-size: 0.85em;
+  color: #ab95bf;
+  margin-top: 18px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.contact-modal .modal-footer {
+  border-top: 1px solid rgba(162, 77, 211, 0.25) !important;
+  padding: 16px 24px !important;
+  gap: 12px !important;
+}
+
+.contact-modal-edit-btn {
+  background: transparent !important;
+  border: 1px solid rgba(199, 112, 240, 0.4) !important;
+  color: #e2d9ec !important;
+  padding: 10px 20px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+}
+
+.contact-modal-edit-btn:hover {
+  background: rgba(147, 76, 206, 0.2) !important;
+  color: white !important;
+  border-color: #cd5ff8 !important;
+}
+
+.contact-modal-send-btn {
+  background: #623686 !important;
+  border: 1px solid #7c3aed !important;
+  color: white !important;
+  padding: 10px 24px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.contact-modal-send-btn:hover:not(:disabled) {
+  background: #7c3aed !important;
+  transform: translateY(-1px) !important;
 }
 
 @media (max-width: 576px) {

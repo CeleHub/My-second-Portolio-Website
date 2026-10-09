@@ -196,13 +196,16 @@ module.exports = async function handler(req, res) {
           try {
             const twilioSid = process.env.TWILIO_ACCOUNT_SID.trim();
             const twilioToken = process.env.TWILIO_AUTH_TOKEN.trim();
-            const twilioFrom = (
-              process.env.TWILIO_WHATSAPP_FROM || "whatsapp:+14155238886"
-            ).trim();
-            let twilioTo = process.env.MY_WHATSAPP_NUMBER.trim();
-            if (!twilioTo.startsWith("whatsapp:")) {
-              twilioTo = `whatsapp:${twilioTo}`;
-            }
+            const rawFrom = process.env.TWILIO_WHATSAPP_FROM || "+17372508034";
+            const cleanFrom = rawFrom.trim().replace(/\s+/g, "");
+            const twilioFrom = cleanFrom.startsWith("whatsapp:")
+              ? cleanFrom
+              : `whatsapp:${cleanFrom}`;
+
+            const rawTo = process.env.MY_WHATSAPP_NUMBER.trim().replace(/\s+/g, "");
+            const twilioTo = rawTo.startsWith("whatsapp:")
+              ? rawTo
+              : `whatsapp:${rawTo}`;
 
             let waBody = `🔔 *New Portfolio Message*\n\n*From:* ${cleanName}\n*Email:* ${email}\n*Subject:* ${
               cleanSubject || "General Inquiry"
